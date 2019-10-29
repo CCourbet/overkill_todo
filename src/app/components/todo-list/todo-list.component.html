@@ -1,0 +1,8 @@
+<div class="todoList">
+    <mat-toolbar class="header">My Todo List</mat-toolbar>
+    <mat-selection-list color="primary">
+        <mat-list-option *ngFor="let todo of todos$ | async" class="todo">
+            {{todo.title}}
+        </mat-list-option>
+    </mat-selection-list>
+</div>
