@@ -1,4 +1,5 @@
-import { createReducer, on, Action } from '@ngrx/store';
+import { Action, createReducer, on } from '@ngrx/store';
+
 import * as todoActions from '../actions/todo.actions';
 import { Todo } from '../models/todo.model';
 
@@ -32,4 +33,9 @@ export function todoReducer(state: TodoState, action: Action) {
     return reducer(state, action);
 }
 
-export const getTodos = (state: TodoState) => state.todos;
+export const getTodosOrdered = (state: TodoState) => {
+    let newTodosArray: Todo[];
+    newTodosArray = state.todos.filter(todo => !todo.isDone);
+    newTodosArray = newTodosArray.concat(state.todos.filter(todo => todo.isDone));
+    return newTodosArray;
+};

@@ -14,8 +14,13 @@
     width: calc(100% - 2 * 20px);
     margin: 20px;
     background-color: white;
-    color: green;
+    color: #227233;
     border: 1px solid green;
     border-radius: 5px;
+  }
+
+  .todo[aria-selected='true'] {
+    text-decoration: line-through;
+    color: #1e2758;
   }
 }

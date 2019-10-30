@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 
 import { Todo } from '../models/todo.model';
@@ -9,6 +9,12 @@ import { Observable, throwError } from 'rxjs';
 export class TodoService {
 
     private todosUrl = '/api/todos';
+    private httpOptions = {
+        headers: new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'my-auth-token'
+        })
+    };
 
     constructor(private http: HttpClient) {
     }
@@ -18,8 +24,12 @@ export class TodoService {
             .pipe(catchError(this.handleError));
     }
 
+    updateTodo(todo: Todo): Observable<Todo> {
+        return this.http.put<Todo>(this.todosUrl, todo, this.httpOptions)
+            .pipe(catchError(this.handleError));
+    }
+
     private handleError(error: any) {
-        console.error('An error occurred', error);
         return throwError(error);
     }
 }

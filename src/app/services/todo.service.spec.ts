@@ -1,7 +1,8 @@
-import { TestBed, inject } from "@angular/core/testing";
 import { HttpClientTestingModule, HttpTestingController, TestRequest } from '@angular/common/http/testing';
-import { TodoService } from './todo.service';
+import { inject, TestBed } from "@angular/core/testing";
+
 import { Todo } from '../models/todo.model';
+import { TodoService } from './todo.service';
 
 describe('TodoService', () => {
     let todoService: TodoService;
@@ -10,7 +11,7 @@ describe('TodoService', () => {
     const testTodos: Todo[] = [
         { id: 0, title: 'Sterilize the cat', isDone: false },
         { id: 1, title: 'Call my dad', isDone: false },
-        { id: 2, title: 'Book a hotel for my holidays', isDone: false }
+        { id: 2, title: 'Book a hotel for my holidays', isDone: true }
     ]
 
     beforeEach(() => {

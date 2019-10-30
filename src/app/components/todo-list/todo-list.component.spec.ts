@@ -5,6 +5,9 @@ import { AppMaterialModule } from 'src/app/app-material.module';
 import { StoreModule } from '@ngrx/store';
 import { todoReducer, TodoState } from 'src/app/reducers/todo.reducer';
 import { RouterTestingModule } from '@angular/router/testing';
+import { By } from '@angular/platform-browser';
+import { doesNotThrow } from 'assert';
+import { DebugElement } from '@angular/core';
 
 describe('TodoListComponent', () => {
   let component: TodoListComponent;
@@ -19,18 +22,9 @@ describe('TodoListComponent', () => {
           todo: todoReducer,
         }),
       ],
-      declarations: [ TodoListComponent ]
+      declarations: [TodoListComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(TodoListComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+  
 });

@@ -1,18 +1,19 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-
-import { AppComponent } from './app.component';
-import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService } from './services/in-memory-data.service';
-import { TodoListComponent } from './components/todo-list/todo-list.component';
-import { StoreModule } from '@ngrx/store';
-import { AppRoutingModule } from './app-routing.module';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { EffectsModule } from '@ngrx/effects';
-import { TodoEffects } from './effects/todo.effects';
-import { TodoService } from './services/todo.service';
-import { todoReducer } from './reducers/todo.reducer';
+import { StoreModule } from '@ngrx/store';
+
+import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { AppMaterialModule } from './app-material.module';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { TodoListComponent } from './components/todo-list/todo-list.component';
+import { TodoEffects } from './effects/todo.effects';
+import { todoReducer } from './reducers/todo.reducer';
+import { InMemoryDataService } from './services/in-memory-data.service';
+import { TodoService } from './services/todo.service';
+
 
 @NgModule({
   declarations: [
