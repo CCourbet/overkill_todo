@@ -1,0 +1,12 @@
+<div *ngIf="todo$ |async; let Todo" class="todoDetails">
+    <mat-card>
+        <mat-card-title>{{Todo.title}}</mat-card-title>
+        <mat-card-content>
+            <p>{{Todo.description}}</p>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-stroked-button (click)="goBack()">GO BACK TO LIST</button>
+        </mat-card-actions>
+    </mat-card>
+
+</div>

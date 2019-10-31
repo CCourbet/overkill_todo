@@ -13,16 +13,20 @@ import { TodoEffects } from './effects/todo.effects';
 import { todoReducer } from './reducers/todo.reducer';
 import { InMemoryDataService } from './services/in-memory-data.service';
 import { TodoService } from './services/todo.service';
+import { TodoDetailsComponent } from './components/todo-details/todo-details.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    TodoListComponent
+    TodoListComponent,
+    TodoDetailsComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
+    FormsModule,
     InMemoryWebApiModule.forRoot(InMemoryDataService),
     AppMaterialModule,
     AppRoutingModule,

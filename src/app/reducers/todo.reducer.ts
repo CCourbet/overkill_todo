@@ -39,3 +39,8 @@ export const getTodosOrdered = (state: TodoState) => {
     newTodosArray = newTodosArray.concat(state.todos.filter(todo => todo.isDone));
     return newTodosArray;
 };
+
+export const getTodoById = (id: number, state: TodoState) => {
+    let todo = state.todos.find(todo => todo.id === id);
+    return todo;
+};

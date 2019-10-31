@@ -1,13 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { TodoListComponent } from './todo-list.component';
-import { AppMaterialModule } from 'src/app/app-material.module';
-import { StoreModule } from '@ngrx/store';
-import { todoReducer, TodoState } from 'src/app/reducers/todo.reducer';
+import { FormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
-import { By } from '@angular/platform-browser';
-import { doesNotThrow } from 'assert';
-import { DebugElement } from '@angular/core';
+import { StoreModule } from '@ngrx/store';
+
+import { AppMaterialModule } from 'src/app/app-material.module';
+import { todoReducer } from 'src/app/reducers/todo.reducer';
+import { TodoListComponent } from './todo-list.component';
 
 describe('TodoListComponent', () => {
   let component: TodoListComponent;
@@ -16,6 +14,7 @@ describe('TodoListComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
+        FormsModule,
         AppMaterialModule,
         RouterTestingModule.withRoutes([]),
         StoreModule.forRoot({
@@ -26,5 +25,15 @@ describe('TodoListComponent', () => {
     })
       .compileComponents();
   }));
-  
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(TodoListComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+
 });

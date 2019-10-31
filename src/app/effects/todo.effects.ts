@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { Action, Store } from '@ngrx/store';
+import { Action } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 
 import * as todoActions from '../actions/todo.actions';
 import { Todo } from '../models/todo.model';
-import { TodoState } from '../reducers/todo.reducer';
 import { TodoService } from '../services/todo.service';
 
 @Injectable()
@@ -14,8 +13,7 @@ export class TodoEffects {
 
     constructor(
         private actions$: Actions,
-        private todoService: TodoService,
-        private store: Store<TodoState>
+        private todoService: TodoService
     ) { }
 
     loadTodos$: Observable<Action> = createEffect(() =>
@@ -28,6 +26,23 @@ export class TodoEffects {
                     ),
                     catchError(error =>
                         of(todoActions.loadTodosFailure({ error }))
+                    )
+                )
+            )
+        ),
+        { resubscribeOnError: false }
+    );
+
+    loadTodoById$: Observable<Action> = createEffect(() =>
+        this.actions$.pipe(
+            ofType(todoActions.loadTodoById),
+            switchMap((action) =>
+                this.todoService.getTodoById(action.id).pipe(
+                    map((todo: Todo) =>
+                        todoActions.loadTodoByIdSuccess({ todo })
+                    ),
+                    catchError(error =>
+                        of(todoActions.loadTodoByIdFailure({ error }))
                     )
                 )
             )

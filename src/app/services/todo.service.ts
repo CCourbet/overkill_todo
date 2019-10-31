@@ -24,6 +24,11 @@ export class TodoService {
             .pipe(catchError(this.handleError));
     }
 
+    getTodoById(id: number): Observable<Todo> {
+        return this.http.get<Todo>(`${this.todosUrl}/${id}`)
+            .pipe(catchError(this.handleError));
+    }
+
     updateTodo(todo: Todo): Observable<Todo> {
         return this.http.put<Todo>(this.todosUrl, todo, this.httpOptions)
             .pipe(catchError(this.handleError));

@@ -1,8 +1,11 @@
-<div class="todoList">
-    <mat-toolbar class="header">My Todo List</mat-toolbar>
-    <mat-selection-list color="primary">
-        <mat-list-option *ngFor="let todo of todos$ | async" class="todo" checkboxPosition='before' selected={{todo.isDone}} (click)="onCheckboxClick(todo)">
+<mat-list class="todos" color="primary">
+    <mat-list-item *ngFor="let todo of todos$ | async" class="todo" [ngClass]="{'isDone': todo.isDone}">
+        <a class="todoTitle" routerLink="/detail/{{todo.id}}">
             {{todo.title}}
-        </mat-list-option>
-    </mat-selection-list>
-</div>
+        </a>
+        <div class="checkbox">
+            <mat-checkbox (change)="onCheckboxClick(todo)" [(ngModel)]="todo.isDone">{{todo.isDone? "Done": "To Do"}}
+            </mat-checkbox>
+        </div>
+    </mat-list-item>
+</mat-list>
