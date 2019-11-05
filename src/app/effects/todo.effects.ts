@@ -50,6 +50,23 @@ export class TodoEffects {
         { resubscribeOnError: false }
     );
 
+    createTodo$: Observable<Action> = createEffect(() =>
+        this.actions$.pipe(
+            ofType(todoActions.createTodo),
+            switchMap((action) =>
+                this.todoService.createTodo(action.todo).pipe(
+                    map((todo: Todo) =>
+                        todoActions.createTodoSuccess({ todo })
+                    ),
+                    catchError(error =>
+                        of(todoActions.createTodoFailure({ error }))
+                    )
+                )
+            )
+        ),
+        { resubscribeOnError: false }
+    );
+
     updateTodo$: Observable<Action> = createEffect(() =>
         this.actions$.pipe(
             ofType(todoActions.updateTodo),

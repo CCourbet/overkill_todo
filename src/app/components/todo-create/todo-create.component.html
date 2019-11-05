@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>New task</h1>
+<div mat-dialog-content class="form">
+    <mat-form-field class="sizeAll" appearance="outline">
+        <mat-label>Task</mat-label>
+        <input matInput required [formControl]="title">
+    </mat-form-field>
+    <mat-form-field class="sizeAll" appearance="outline">
+        <mat-label>Details</mat-label>
+        <textarea matInput  [formControl]="description"></textarea>
+    </mat-form-field>
+</div>
+<div mat-dialog-actions>
+    <button mat-stroked-button (click)="onCancel()">Cancel</button>
+    <button mat-stroked-button color="primary" type="submit" [disabled]="formIsValid" (click)="onCreate()">Create</button>
+</div>

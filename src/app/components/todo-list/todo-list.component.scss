@@ -1,5 +1,5 @@
 $doneColor: #e91e63;
-$notDoneColor : #227233;
+$notDoneColor: #227233;
 
 .todos {
   width: calc(100% - 2 * 20px);
@@ -41,7 +41,16 @@ $notDoneColor : #227233;
       padding-left: 20px;
       border-left: 2px solid $notDoneColor;
     }
-
-    
   }
+}
+
+.loader {
+  display: block;
+  margin: 40px auto;
+}
+
+.createButton {
+  width: calc(100% - 2 * 20px);
+  margin: 20px;
+  background-color: white;
 }

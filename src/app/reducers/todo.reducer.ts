@@ -7,9 +7,10 @@ export interface TodoState {
     loaded: boolean;
     loading: boolean;
     todos: Todo[];
+    error?: Error;    
 }
 
-const initialState: TodoState = {
+export const initialState: TodoState = {
     loaded: false,
     loading: false,
     todos: [],
@@ -26,6 +27,29 @@ const reducer = createReducer(
         loaded: true,
         loading: false,
         todos: [...action.todos]
+    })),
+    on(todoActions.loadTodosFailure, (state, action) => ({
+        ...state,
+        loaded: true,
+        loading: false,
+        error: action.error
+    })),
+    on(todoActions.createTodo, state => ({
+        ...state,
+        loaded: false,
+        loading: true
+    })),
+    on(todoActions.createTodoSuccess, (state, action) => ({
+        ...state,
+        loaded: true,
+        loading: false,
+        todos: [...state.todos, action.todo]
+    })),
+    on(todoActions.createTodoFailure, (state, action) => ({
+        ...state,
+        loaded: true,
+        loading: false,
+        error: action.error
     }))
 );
 
@@ -35,8 +59,9 @@ export function todoReducer(state: TodoState, action: Action) {
 
 export const getTodosOrdered = (state: TodoState) => {
     let newTodosArray: Todo[];
-    newTodosArray = state.todos.filter(todo => !todo.isDone);
-    newTodosArray = newTodosArray.concat(state.todos.filter(todo => todo.isDone));
+    newTodosArray = state.todos.filter(todo => todo.isDone);
+    newTodosArray = newTodosArray.concat(state.todos.filter(todo => !todo.isDone));
+    newTodosArray.reverse();
     return newTodosArray;
 };
 

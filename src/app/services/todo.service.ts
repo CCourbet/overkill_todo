@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { Todo } from '../models/todo.model';
-import { Observable, throwError } from 'rxjs';
 
 @Injectable()
 export class TodoService {
@@ -26,6 +26,11 @@ export class TodoService {
 
     getTodoById(id: number): Observable<Todo> {
         return this.http.get<Todo>(`${this.todosUrl}/${id}`)
+            .pipe(catchError(this.handleError));
+    }
+
+    createTodo(todo: Todo): Observable<Todo> {
+        return this.http.post<Todo>(this.todosUrl, todo, this.httpOptions)
             .pipe(catchError(this.handleError));
     }
 

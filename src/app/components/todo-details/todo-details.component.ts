@@ -23,7 +23,6 @@ export class TodoDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.isLoaded);
     this.isLoaded.subscribe(loaded => {
       if (!loaded) {
         this.store.dispatch(todoActions.loadTodos());
@@ -42,5 +41,4 @@ export class TodoDetailsComponent implements OnInit {
   public goBack() {
     this.router.navigate(['/']);
   }
-
 }

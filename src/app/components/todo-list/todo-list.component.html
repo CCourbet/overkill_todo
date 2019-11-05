@@ -1,11 +1,16 @@
-<mat-list class="todos" color="primary">
+<mat-list *ngIf="isLoaded$ |async as isLoaded; else loading" class="todos" color="primary">
     <mat-list-item *ngFor="let todo of todos$ | async" class="todo" [ngClass]="{'isDone': todo.isDone}">
         <a class="todoTitle" routerLink="/detail/{{todo.id}}">
             {{todo.title}}
         </a>
         <div class="checkbox">
-            <mat-checkbox (change)="onCheckboxClick(todo)" [(ngModel)]="todo.isDone">{{todo.isDone? "Done": "To Do"}}
+            <mat-checkbox (change)="toggleStatus(todo)" [(ngModel)]="todo.isDone">{{todo.isDone? "Done": "To Do"}}
             </mat-checkbox>
         </div>
     </mat-list-item>
 </mat-list>
+<ng-template #loading>
+        <mat-spinner class="loader"></mat-spinner>
+</ng-template>
+
+<button #dialogOpenButton mat-stroked-button class="createButton" color="primary" (click)="createNewTodo()">CREATE NEW TASK</button>
